@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title>Student Registration Form</title>
+</head>
+ 
+ <body bgcolor="#87e0d7">
+ 	<center>
+ 		<h1>STUDENT REGISTRATION FORM</h1>
+ 	</center>
+    <form>
+ 	<table align="center" cellpadding="10" border="5">
+ 
+
+     <tr>
+     	<td>NAME</td>
+     	<td><input type="text" name="First name" maxlength="30"/></td>
+     </tr>
+
+
+     <tr>
+     	<td>COURSE APPLIED FOR</td>
+     	<td>
+     		<select name="Course">
+     			<option value="MCA">MCA</option>
+     			<option value="BCA">BCA</option>
+     			<option value="PGDCA">PGDCA</option>
+     			<option value="M.sc">M.sc</option>
+     		</select>
+     	</td>
+     </tr>
+
+     <tr>
+     	<td>GENDER</td>
+     	<td>
+     		Male <input type="radio" name="Gender" value="Male"/>
+     		Female <input type="radio" name="Gender" value="Feamle"/>
+     	</td>
+     </tr>
+
+     <tr>
+     	<td>ADDRESS <br/><br/><br/></td>
+     	<td><textarea name="ADDRESS" rows="4" cols="30"></textarea></td>
+     </tr>
+
+
+     <tr>
+     	<td>COUNTRY</td>
+     	<td><input type="text" name="Country" value="India" readonly="readonly"/></td>
+     </tr>
+
+     <tr>
+     	<td>HOBBIES<br/><br/><br/></td>
+     	<td>
+     		Drawing<input type="checkbox" name="Hobby_Drawing" value="Drawing"/>
+     		Singing<input type="checkbox" name="Hobby_Singing" value="Singing"/>
+     		Dancing<input type="checkbox" name="Hobby_Dancing" value="Dancing"/>
+     		Sketching<input type="checkbox" name="Hobby_Sketching" value="Sketching">
+
+     	</td>
+     </tr>
+
+      <tr>
+      	<td colspan="2" align="center">
+
+      		<input type="submit" value="Submit" class="btn">
+      		<input type="Reset" value="Reset" class="btn">
+      	</td>
+      </tr>
+  </table>
+</form>
+</body>
+</html>
