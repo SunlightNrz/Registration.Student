@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spotify Clone</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #121212;
+    color: white;
+}
+
+.container {
+    display: flex;
+}
+
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background: #000;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    color: #1db954;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px 0;
+    color: #b3b3b3;
+    cursor: pointer;
+}
+
+.sidebar li:hover {
+    color: white;
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+.playlists {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #181818;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.card:hover {
+    background: #282828;
+}
+
+.card img {
+    width: 100%;
+}
+
+
+.player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #181818;
+    padding: 10px;
+}
+
+.controls {
+    text-align: center;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    color: #1db954;
+}
+
+.progress {
+    width: 100%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+    <h2>Spotify</h2>
+    <ul>
+        <li>Home</li>
+        <li>Search</li>
+        <li>Library</li>
+    </ul>
+</div>
+
+<div class="main">
+    <h2>Play Songs</h2>
+
+    <div class="playlists">
+
+        <div class="card" onclick="playSong(0)">
+            <img src="https://via.placeholder.com/150">
+            <h4>Song 1</h4>
+        </div>
+
+        <div class="card" onclick="playSong(1)">
+            <img src="https://via.placeholder.com/150">
+            <h4>Song 2</h4>
+        </div>
+
+        <div class="card" onclick="playSong(2)">
+            <img src="https://via.placeholder.com/150">
+            <h4>Song 3</h4>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<!-- Player -->
+<div class="player">
+    <div id="songName">No song selected</div>
+
+    <input type="range" id="progress" class="progress" value="0">
+
+    <div class="controls">
+        <button onclick="prevSong()">⏮</button>
+        <button onclick="togglePlay()">▶</button>
+        <button onclick="nextSong()">⏭</button>
+    </div>
+</div>
+
+<audio id="audio"></audio>
+
+<script>
+let songs = [
+    {
+        name: "Song 1",
+        src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+    },
+    {
+        name: "Song 2",
+        src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+    },
+    {
+        name: "Song 3",
+        src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+    }
+];
+
+let audio = document.getElementById("audio");
+let songName = document.getElementById("songName");
+let progress = document.getElementById("progress");
+
+let currentSong = 0;
+let isPlaying = false;
+
+function playSong(index) {
+    currentSong = index;
+    audio.src = songs[index].src;
+    songName.innerText = songs[index].name;
+    audio.play();
+    isPlaying = true;
+}
+
+function togglePlay() {
+    if (!audio.src) return;
+
+    if (isPlaying) {
+        audio.pause();
+        isPlaying = false;
+    } else {
+        audio.play();
+        isPlaying = true;
+    }
+}
+
+function nextSong() {
+    currentSong = (currentSong + 1) % songs.length;
+    playSong(currentSong);
+}
+
+function prevSong() {
+    currentSong = (currentSong - 1 + songs.length) % songs.length;
+    playSong(currentSong);
+}
+
+/* Progress Bar */
+audio.addEventListener("timeupdate", () => {
+    progress.value = (audio.currentTime / audio.duration) * 100;
+});
+
+progress.addEventListener("input", () => {
+    audio.currentTime = (progress.value / 100) * audio.duration;
+});
+</script>
+
+</body>
+</html>
